@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crud</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./CSS/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+
+<body>
+    <!-- /section Add New Product  -->
+    <section class=" py-5">
+        <div class="container">
+            <h2 class="text-light  fw-bold mb-4 text-center animate__animated animate__fadeInUp">Add New Product</h2>
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 mb-4">
+   
+                <!-- /Left Side (Form Fields) -->
+                <div class="col-md-6 col-sm-12 d-flex flex-column gap-4">
+    
+                    <!-- /Product Title -->
+                    <div class="form-floating w-100 shadow rounded animate__animated animate__fadeInUp">
+                        <input
+                        oninput="validateForm(this)"
+                            type="text"
+                            class="form-control border-start-0"
+                            id="productTitle"
+                            placeholder="Product Title">
+                    <span class="alert alert-danger my-2 py-2 d-flex d-none"  role="alert">
+                        Please enter the title of the product (First letter uppercase, 2-15 lowercase letters).
+                    </span>     
+                     <label for="productTitle" class="text-secondary">Product Title</label>
+                    </div>
+                    <!-- Product Title /-->
+
+                    <!-- /Product Price -->
+                    <div class="form-floating w-100 shadow rounded animate__animated animate__fadeInUp">
+                        <input
+                            oninput="validateForm(this)"
+                            type="text"
+                            class="form-control border-0 "
+                            id="productPrice"
+                            placeholder="Product Price">
+                            <span class="alert alert-danger my-2 py-2 d-flex d-none"  role="alert">
+                                Please write only numbers here The price must be between 6000 and 60000
+                            </span>    
+                        <label for="productPrice" class="text-secondary">Product Price</label>
+                    </div>
+                    <!-- Product Price/-->
+
+                    <!-- /Product Category -->
+                    <div class="form-floating w-100 shadow rounded animate__animated animate__fadeInUp">
+                        <input
+                          oninput="validateForm(this)" 
+                          list="CategorysList" 
+                          type="text" 
+                          class="form-control border-0" 
+                          id="productCategory"
+                            placeholder="Product Category">
+                            <span class="alert alert-danger my-2 py-2 d-flex d-none"  role="alert">
+                                Choose a category ( TV, Mobile, Laptops, Screens ,Electronics.)
+                            </span>    
+                        <label for="productCategory" class="text-secondary">Product Category</label>
+                        <datalist id="CategorysList">
+                            <option value="TV">
+                            <option value="Mobile">
+                            <option value="Screens">
+                            <option value="Laptops">
+                            <option value="Electronics">
+                              
+                    </div>
+                    <!-- Product Category/ -->
+            
+                     <!-- /Product Description -->
+                    <div class="form-floating w-100 shadow rounded animate__animated animate__fadeInUp">
+                        <textarea
+                            oninput="validateForm(this)"
+                            class="form-control border-0"
+                            id="productdesc"
+                            placeholder="Product Description"
+                            style="height: 150px;"></textarea>
+                            <span class="alert alert-danger my-2 py-2 d-flex d-none"  role="alert">
+                                Provide a description (between 10 to 255 characters, alphanumeric and spaces).
+                            </span> 
+                        <label for="productdesc" class="text-secondary">Product Description</label>
+                    </div>
+                     <!-- Product Description / -->
+
+                </div>
+                <!-- Left Side (Form Fields)/ -->
+                 
+                <!-- /Right Side (Product Image) -->
+                <div class="col-md-6 col-sm-12 d-flex justify-content-center">
+                    <div class="w-100 shadow-lg p-4 rounded text-center position-relative bg-white">
+                        <label for="productImage" class="text-secondary fw-bold d-block mb-3 animate__animated animate__fadeInUp">Upload Product Image</label>
+                        <div class="border border-2 rounded p-3 mb-3 " style="height: 250px;">
+                            <img  id="previewImage" src="#" alt="Image Preview" class="img-fluid h-100 w-100 d-none object-fit-cover rounded animate__animated animate__fadeIn">
+                        </div>
+                        <button class="btn btn-outline-primary px-4 py-2 rounded-pill animate__animated animate__zoomIn" onclick="document.getElementById('productImage').click()">Choose Image</button>
+                        <input
+                           oninput="validateForm(this)"
+                            type="file"
+                            class="form-control d-none"
+                            id="productImage"
+                            accept="image/*"
+                            onchange="previewFile()">
+                            <span class="alert alert-danger my-3 py-2 d-flex d-none"  role="alert">
+                                Upload an image (allowed formats: .jpg, .jpeg, .png, .gif)
+                            </span> 
+                    </div>
+                </div>
+                <!-- Right Side (Product Image)/ -->
+             
+            </div>
+            <!-- Product Search -->
+            <div class="form-floating w-100 shadow-sm rounded animate__animated animate__fadeInUp">
+                <input
+                    type="text"
+                    class="form-control border-0 shadow-sm"
+                    id="productSearch"
+                    placeholder="Search for products..."
+                    aria-label="Product Search"
+                    aria-describedby="searchIcon"
+                    oninput="searchProductsByTitle(this.value)"
+                    >
+                <label for="productSearch" class="text-secondary">Products Search</label>
+                <div class="input-group-append position-absolute top-50 end-0 translate-middle-y me-3" id="searchIcon">
+                    <i class="fa fa-search text-muted"></i>
+                </div>
+            </div>
+            <!-- /Product Search -->
+
+
+                <!-- /all btn -->
+                <div class="container mt-4">
+                <div class="row">
+                    <!-- addProduct -->
+                    <div id="btnAdd" class="col-12 ">
+                    <button onclick="addProduct()" class="btn btn-success w-100 py-2 shadow-lg rounded-pill animate__animated animate__zoomIn">
+                        <i class="fas fa-plus-circle"></i> Add Product
+                    </button>
+                    </div>
+
+                    <!-- updateProduct -->
+                    <div id="btnUpdate" class="col-12 d-none">
+                    <button onclick="updateProduct()" class=" btn btn-primary  w-100 py-2 shadow-lg rounded-pill animate__animated animate__zoomIn">
+                        <i class="fas fa-edit"></i> Update Product
+                    </button>
+                    </div>
+                </div>
+                </div>
+                <!-- all btn/ -->
+
+        </div>
+    </section>
+    <!-- section Add New Product/  -->
+
+    <section class="py-5">
+        <div class="container">
+            <div id="ProductRow" class="row gy-4">
+                <!-- <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="product bg-white rounded-3 shadow-sm overflow-hidden position-relative">
+                        <div class="product-image">
+                            <img
+                                class="img-fluid w-100"
+                                src="./images/Fig.-11Current-construction.jpg"
+                                alt="Product Image">
+                        </div>
+                        <div class="product-content p-4 text-center">
+                            <h3 class="fw-bold text-dark mb-2">Product Title</h3>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="badge bg-primary text-white px-3 py-1">Category</span>
+                                <span class="text-muted">$Price</span>
+                            </div>
+                            <p class="text-secondary">A short description of the product to grab attention.</p>
+                           <div class="d-flex justify-content-between">
+                            <BUtton class="btn btn-outline-danger ">Delete</BUtton>
+                            <BUtton class="btn btn-outline-success ">Edit</BUtton>
+                        </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/mine.js"></script>
+</body>
+
+</html>

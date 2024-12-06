@@ -1,0 +1,62 @@
+body{
+
+  background-color: #24353F;
+}
+
+
+/* ----- */
+
+/* الكارد الأساسي */
+.product {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid #eaeaea;
+}
+
+.product:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* الصورة */
+.product-image img {
+  max-height: 250px;
+  object-fit: cover;
+  border-bottom: 2px solid #eaeaea;
+}
+
+/* النص */
+.product-content h3 {
+  font-size: 1.4rem;
+}
+
+.product-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #6c757d;
+}
+
+/* شارات الفئة */
+.product-content .badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* تأثير التحويم على الكارد */
+.product:hover .product-content h3 {
+  color: #007bff;
+}
+
+.product:hover .badge {
+  background-color: #ff5722;
+  color: #fff;
+}
+
+/* تحسين النصوص */
+.product-content {
+  transition: all 0.3s ease-in-out;
+}
+
+
+/* ----- */
+
